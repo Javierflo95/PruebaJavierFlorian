@@ -17,12 +17,13 @@ namespace PruebaJavierFlorian.Web.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        WsTareas.WsTareas oWsTareas;
 
         public AccountController()
         {
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
@@ -34,9 +35,9 @@ namespace PruebaJavierFlorian.Web.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -66,28 +67,32 @@ namespace PruebaJavierFlorian.Web.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
+        public async Task<ActionResult> Login(LoginUserViewModel model, string returnUrl)
         {
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
+            oWsTareas = new WsTareas.WsTareas();
 
-            // This doesn't count login failures towards account lockout
-            // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
-            switch (result)
+            try
             {
-                case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
-                case SignInStatus.LockedOut:
-                    return View("Lockout");
-                case SignInStatus.RequiresVerification:
-                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
-                case SignInStatus.Failure:
-                default:
-                    ModelState.AddModelError("", "Invalid login attempt.");
+                if (!ModelState.IsValid)
+                {
                     return View(model);
+                }
+
+                WsTareas.User oUser = new WsTareas.User()
+                {
+                    userName = model.userName,
+                };
+
+                var _user = oWsTareas.GetUse(oUser);
+                if (_user != null)
+                    return RedirectToAction("Index", "User");
+                else
+                    return View(model);
+            }
+            catch (Exception)
+            {
+
+                throw;
             }
         }
 
@@ -120,7 +125,7 @@ namespace PruebaJavierFlorian.Web.Controllers
             // If a user enters incorrect codes for a specified amount of time then the user account 
             // will be locked out for a specified amount of time. 
             // You can configure the account lockout settings in IdentityConfig
-            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent:  model.RememberMe, rememberBrowser: model.RememberBrowser);
+            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent: model.RememberMe, rememberBrowser: model.RememberBrowser);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -147,29 +152,38 @@ namespace PruebaJavierFlorian.Web.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
+        public async Task<ActionResult> Register(RegisterUserViewModel model)
         {
-            if (ModelState.IsValid)
+            oWsTareas = new WsTareas.WsTareas();
+            
+
+            try
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-                var result = await UserManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
+
+                if (ModelState.IsValid)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
-                    // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
-                    // Send an email with this link
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+
+                    WsTareas.User oUser = new WsTareas.User()
+                    {
+                        userName = model.userName,
+                        nombre = model.nombre,
+                        apellido = model.apellido,
+                        edad = model.edad.ToString()
+                    };
+
+                    oWsTareas.CreateUser(oUser);
 
                     return RedirectToAction("Index", "Home");
                 }
-                AddErrors(result);
-            }
 
-            // If we got this far, something failed, redisplay form
-            return View(model);
+                // If we got this far, something failed, redisplay form
+                return View(model);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         //

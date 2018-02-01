@@ -62,6 +62,57 @@ namespace PruebaJavierFlorian.Web.Models
         public bool RememberMe { get; set; }
     }
 
+    public class LoginUserViewModel
+    {
+        [Required]
+        [Display(Name = "Nombre de Usuario")]
+        public string userName { get; set; }
+
+        [Required]
+        [DataType(DataType.Password)]
+        [Display(Name = "Contraseña")]
+        public string Password { get; set; }
+
+        [Display(Name = "Recordar contraseña?")]
+        public bool RememberMe { get; set; }
+    }
+
+    public class RegisterUserViewModel
+    {
+        [Required]
+        [Display(Name = "Nombre de Usuario")]
+        public string userName { get; set; }
+
+        [Required]
+        [Display(Name = "Nombre")]
+        public string nombre { get; set; }
+
+        [Required]
+        [Display(Name = "Apellido")]
+        public string apellido { get; set; }
+
+        [Required]
+        [Display(Name = "Edad")]
+        public int edad { get; set; }
+
+        [Required]
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [DataType(DataType.Password)]
+        [Display(Name = "Contraseña")]
+        public string Password { get; set; }
+
+        [DataType(DataType.Password)]
+        [Display(Name = "Confirmar Contraseña")]
+        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        public string ConfirmPassword { get; set; }
+
+        [Required]
+        [Display(Name = "Crear Tarea")]
+        public bool crearTarea { get; set; }
+
+    }
+
+
     public class RegisterViewModel
     {
         [Required]
