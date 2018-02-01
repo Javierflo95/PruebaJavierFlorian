@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="WsTareas" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://localhost:63697/WsTareas.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:63697/WsTareas.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:63697/WsTareas.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Entities" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IWsTareas_CreateUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateUser" />
+  </wsdl:message>
+  <wsdl:message name="IWsTareas_CreateUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWsTareas_EditUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:EditUser" />
+  </wsdl:message>
+  <wsdl:message name="IWsTareas_EditUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EditUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWsTareas_GetUse_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUse" />
+  </wsdl:message>
+  <wsdl:message name="IWsTareas_GetUse_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUseResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWsTareas_GetUserLogin_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserLogin" />
+  </wsdl:message>
+  <wsdl:message name="IWsTareas_GetUserLogin_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserLoginResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWsTareas_ListUsers_InputMessage">
+    <wsdl:part name="parameters" element="tns:ListUsers" />
+  </wsdl:message>
+  <wsdl:message name="IWsTareas_ListUsers_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ListUsersResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWsTareas_DeleteUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteUser" />
+  </wsdl:message>
+  <wsdl:message name="IWsTareas_DeleteUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWsTareas_CreateTask_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateTask" />
+  </wsdl:message>
+  <wsdl:message name="IWsTareas_CreateTask_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateTaskResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWsTareas_EditTask_InputMessage">
+    <wsdl:part name="parameters" element="tns:EditTask" />
+  </wsdl:message>
+  <wsdl:message name="IWsTareas_EditTask_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EditTaskResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWsTareas_GetTask_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetTask" />
+  </wsdl:message>
+  <wsdl:message name="IWsTareas_GetTask_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetTaskResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWsTareas_ListTasks_InputMessage">
+    <wsdl:part name="parameters" element="tns:ListTasks" />
+  </wsdl:message>
+  <wsdl:message name="IWsTareas_ListTasks_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ListTasksResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWsTareas_DeleteTask_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteTask" />
+  </wsdl:message>
+  <wsdl:message name="IWsTareas_DeleteTask_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteTaskResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IWsTareas">
+    <wsdl:operation name="CreateUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWsTareas/CreateUser" message="tns:IWsTareas_CreateUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWsTareas/CreateUserResponse" message="tns:IWsTareas_CreateUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EditUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWsTareas/EditUser" message="tns:IWsTareas_EditUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWsTareas/EditUserResponse" message="tns:IWsTareas_EditUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUse">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWsTareas/GetUse" message="tns:IWsTareas_GetUse_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWsTareas/GetUseResponse" message="tns:IWsTareas_GetUse_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserLogin">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWsTareas/GetUserLogin" message="tns:IWsTareas_GetUserLogin_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWsTareas/GetUserLoginResponse" message="tns:IWsTareas_GetUserLogin_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ListUsers">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWsTareas/ListUsers" message="tns:IWsTareas_ListUsers_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWsTareas/ListUsersResponse" message="tns:IWsTareas_ListUsers_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWsTareas/DeleteUser" message="tns:IWsTareas_DeleteUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWsTareas/DeleteUserResponse" message="tns:IWsTareas_DeleteUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateTask">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWsTareas/CreateTask" message="tns:IWsTareas_CreateTask_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWsTareas/CreateTaskResponse" message="tns:IWsTareas_CreateTask_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EditTask">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWsTareas/EditTask" message="tns:IWsTareas_EditTask_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWsTareas/EditTaskResponse" message="tns:IWsTareas_EditTask_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTask">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWsTareas/GetTask" message="tns:IWsTareas_GetTask_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWsTareas/GetTaskResponse" message="tns:IWsTareas_GetTask_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ListTasks">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWsTareas/ListTasks" message="tns:IWsTareas_ListTasks_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWsTareas/ListTasksResponse" message="tns:IWsTareas_ListTasks_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteTask">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWsTareas/DeleteTask" message="tns:IWsTareas_DeleteTask_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWsTareas/DeleteTaskResponse" message="tns:IWsTareas_DeleteTask_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IWsTareas" type="tns:IWsTareas">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="CreateUser">
+      <soap:operation soapAction="http://tempuri.org/IWsTareas/CreateUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EditUser">
+      <soap:operation soapAction="http://tempuri.org/IWsTareas/EditUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUse">
+      <soap:operation soapAction="http://tempuri.org/IWsTareas/GetUse" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserLogin">
+      <soap:operation soapAction="http://tempuri.org/IWsTareas/GetUserLogin" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListUsers">
+      <soap:operation soapAction="http://tempuri.org/IWsTareas/ListUsers" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteUser">
+      <soap:operation soapAction="http://tempuri.org/IWsTareas/DeleteUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateTask">
+      <soap:operation soapAction="http://tempuri.org/IWsTareas/CreateTask" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EditTask">
+      <soap:operation soapAction="http://tempuri.org/IWsTareas/EditTask" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTask">
+      <soap:operation soapAction="http://tempuri.org/IWsTareas/GetTask" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListTasks">
+      <soap:operation soapAction="http://tempuri.org/IWsTareas/ListTasks" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteTask">
+      <soap:operation soapAction="http://tempuri.org/IWsTareas/DeleteTask" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WsTareas">
+    <wsdl:port name="BasicHttpBinding_IWsTareas" binding="tns:BasicHttpBinding_IWsTareas">
+      <soap:address location="http://localhost:63697/WsTareas.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
