@@ -81,18 +81,24 @@ namespace PruebaJavierFlorian.Web.Controllers
                 WsTareas.User oUser = new WsTareas.User()
                 {
                     userName = model.userName,
+                    password = model.Password
                 };
 
-                var _user = oWsTareas.GetUse(oUser);
-                if (_user != null)
+                var _user = oWsTareas.GetUserLogin(oUser);
+
+                if (_user != null && !string.IsNullOrWhiteSpace(_user.userName))
+                {
+                    Session["userName"] = _user.userName;
+                    Session["idUser"] = _user.id;
+                    Session["puedeCrearTarea"] = (String.IsNullOrWhiteSpace(_user.crearTarea)) ? false : true;
                     return RedirectToAction("Index", "User");
+                }
                 else
                     return View(model);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                return View(model);
             }
         }
 
@@ -155,7 +161,7 @@ namespace PruebaJavierFlorian.Web.Controllers
         public async Task<ActionResult> Register(RegisterUserViewModel model)
         {
             oWsTareas = new WsTareas.WsTareas();
-            
+
 
             try
             {

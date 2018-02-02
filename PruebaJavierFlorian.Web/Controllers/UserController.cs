@@ -61,54 +61,153 @@ namespace PruebaJavierFlorian.Web.Controllers
         // GET: User/Create
         public ActionResult Create()
         {
-            return View();
+            try
+            {
+                return View();
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
         }
 
-        // POST: User/Create
+        /// <summary>
+        /// Crea un usuario 
+        /// </summary>
+        /// <param name="oUser">objecto deonde esta los datos del usuario</param>
+        /// <returns>vista</returns>
         [HttpPost]
         public ActionResult Create(User oUser)
         {
+            oWsTareas = new WsTareas.WsTareas();
+
             try
             {
-                // TODO: Add insert logic here
-
+                WsTareas.User usuario = new WsTareas.User()
+                {
+                    userName = oUser.userName,
+                    nombre = oUser.nombre,
+                    apellido = oUser.apellido,
+                    edad = oUser.edad.ToString(),
+                    password = oUser.password,
+                    crearTarea = oUser.crearTarea.ToString(),
+                    estado = oUser.estado.ToString(),
+                };
+                oWsTareas.CreateUser(usuario);
                 return RedirectToAction("Index");
             }
-            catch
+            catch (Exception)
             {
-                return View();
+                return RedirectToAction("Index");
+                throw;
             }
         }
 
         // GET: User/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(string userName)
         {
+            oWsTareas = new WsTareas.WsTareas();
+            WsTareas.User oUser = new WsTareas.User();
+            Entities.User usuario = new Entities.User();
+
+            try
+            {
+                if (!String.IsNullOrWhiteSpace(userName))
+                {
+                    oUser.userName = userName;
+
+                    var user = oWsTareas.GetUse(oUser);
+                    if (user != null)
+                    {
+                        #region TryParse variables
+
+                        int _id = 0;
+                        int.TryParse(user.id, out _id);
+
+                        int _edad = 0;
+                        int.TryParse(user.edad, out _edad);
+
+                        bool _estado = false;
+                        bool.TryParse(user.estado, out _estado);
+
+                        bool _crearTarea = false;
+                        bool.TryParse(user.crearTarea, out _crearTarea);
+                        #endregion
+
+                        usuario = new Entities.User()
+                        {
+                            id = _id,
+                            userName = user.userName,
+                            nombre = user.nombre,
+                            apellido = user.apellido,
+                            edad = _edad,
+                            estado = _estado,
+                            crearTarea = _crearTarea,
+                            password = user.password
+                        };
+                    }
+                    return View(usuario);
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
             return View();
         }
 
-        // POST: User/Edit/5
+       /// <summary>
+       /// Actualiza el usuario
+       /// </summary>
+       /// <param name="oUser">Objeto usuario</param>
+       /// <returns></returns>
         [HttpPost]
         public ActionResult Edit(User oUser)
         {
+            oWsTareas = new WsTareas.WsTareas();
+            WsTareas.User usuario = new WsTareas.User();
             try
             {
-                // TODO: Add update logic here
+                usuario = new WsTareas.User()
+                {
+                    id = oUser.id.ToString(),
+                    userName = oUser.userName,
+                    nombre = oUser.nombre,
+                    apellido = oUser.apellido,
+                    edad = oUser.edad.ToString(),
+                    estado = oUser.estado.ToString(),
+                    password = oUser.password,
+                    crearTarea = oUser.crearTarea.ToString()
+                };
+
+                oWsTareas.EditUser(usuario);
 
                 return RedirectToAction("Index");
             }
-            catch
+            catch (Exception ex)
             {
                 return View();
             }
         }
 
 
-        // POST: User/Delete/5
+        /// <summary>
+        /// Elimina el usuario
+        /// </summary>
+        /// <param name="userName">Contiene el nombre del usuario</param>
+        /// <returns></returns>
         [HttpPost]
-        public JsonResult Delete(int id)
+        public JsonResult Delete(string userName)
         {
+            oWsTareas = new WsTareas.WsTareas();
+            WsTareas.User oUser = new WsTareas.User();
             try
             {
+                oUser.userName = userName;
+                oWsTareas.DeleteUser(oUser);
                 return Json("Ok", JsonRequestBehavior.AllowGet);
 
             }

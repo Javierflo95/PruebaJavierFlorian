@@ -26,6 +26,7 @@
       <xs:element minOccurs="0" name="estado" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="fechaCreacion" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="fechaVencimiento" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="finalizada" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="id" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="nombre" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="user" nillable="true" type="tns:User" />

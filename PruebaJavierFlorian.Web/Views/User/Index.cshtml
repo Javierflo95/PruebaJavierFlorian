@@ -2,15 +2,19 @@
 
 @{
     ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    bool crearTarea = false;
+    bool.TryParse(Session["puedeCrearTarea"].ToString(), out crearTarea);
+
 }
 
-<h2>Index</h2>
-<br />
+<hr />
 <p>
     @Html.ActionLink("Crear nuevo Usuario", "Create")
 </p>
+
 <br />
-<table class="table table-responsive table-bordered table-condensed">
+<table class="table table-bordered table-hover table-condensed table-responsive">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.userName)
@@ -63,12 +67,20 @@
                     @Html.DisplayFor(modelItem => item.crearTarea)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.id }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.id })
+                    @Html.ActionLink("Actualizar", "Edit", new { userName = item.userName }, new { @class = "btn btn-primary btn-sm" }) |
+
+                    @if (crearTarea)
+                    {@Html.ActionLink("Crear Tarea", "Create", "Task", new { userName = item.userName }, new { @class = "btn btn-primary btn-sm" });
+                }
+
+                    @Html.ActionLink("Eliminar", null, null, new { @class = "btnEliminar btn btn-primary btn-sm", @data_id = item.userName })
                 </td>
             </tr>
         }
     }
 
 </table>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/User")
+}

@@ -87,51 +87,57 @@
   </xs:element>
   <xs:element name="CreateTaskResponse">
     <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="EditTask">
-    <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/Entities" minOccurs="0" name="oTask" nillable="true" type="q11:Task" />
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/Entities" minOccurs="0" name="CreateTaskResult" nillable="true" type="q11:Task" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="EditTaskResponse">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetTask">
+  <xs:element name="EditTask">
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/Entities" minOccurs="0" name="oTask" nillable="true" type="q12:Task" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="EditTaskResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/Entities" minOccurs="0" name="EditTaskResult" nillable="true" type="q13:Task" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetTask">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/Entities" minOccurs="0" name="oTask" nillable="true" type="q14:Task" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="GetTaskResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/Entities" minOccurs="0" name="GetTaskResult" nillable="true" type="q13:Task" />
+        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/Entities" minOccurs="0" name="GetTaskResult" nillable="true" type="q15:Task" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="ListTasks">
     <xs:complexType>
-      <xs:sequence />
+      <xs:sequence>
+        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/Entities" minOccurs="0" name="oTask" nillable="true" type="q16:Task" />
+      </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="ListTasksResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/Entities" minOccurs="0" name="ListTasksResult" nillable="true" type="q14:ArrayOfTask" />
+        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/Entities" minOccurs="0" name="ListTasksResult" nillable="true" type="q17:ArrayOfTask" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="DeleteTask">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/Entities" minOccurs="0" name="oTask" nillable="true" type="q15:Task" />
+        <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/Entities" minOccurs="0" name="oTask" nillable="true" type="q18:Task" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

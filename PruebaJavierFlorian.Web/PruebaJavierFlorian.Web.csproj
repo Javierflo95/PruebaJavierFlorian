@@ -240,10 +240,12 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="Web References\WsTareas\Reference.map">
+    <Content Include="Scripts\Task-1.1.1.js" />
+    <Content Include="Scripts\User-1.1.1.js" />
+    <None Include="Web References\WsTareas\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
-    </Content>
+    </None>
     <Content Include="Web References\WsTareas\Task.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
@@ -253,6 +255,10 @@
     <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\User\Create.cshtml" />
     <Content Include="Views\User\Edit.cshtml" />
+    <Content Include="Views\Task\Index.cshtml" />
+    <Content Include="Views\Task\Create.cshtml" />
+    <Content Include="Views\Task\Edit.cshtml" />
+    <Content Include="Views\Shared\_LoginLayout.cshtml" />
     <None Include="Web References\WsTareas\WsTareas.disco" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -301,7 +307,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Task\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

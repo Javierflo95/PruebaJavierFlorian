@@ -297,10 +297,12 @@ namespace PruebaJavierFlorian.Web.WsTareas {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/IWsTareas/CreateTask", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void CreateTask([System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] Task oTask, [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] User oUser) {
-            this.Invoke("CreateTask", new object[] {
+        [return: System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public Task CreateTask([System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] Task oTask, [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] User oUser) {
+            object[] results = this.Invoke("CreateTask", new object[] {
                         oTask,
                         oUser});
+            return ((Task)(results[0]));
         }
         
         /// <remarks/>
@@ -321,15 +323,17 @@ namespace PruebaJavierFlorian.Web.WsTareas {
         private void OnCreateTaskOperationCompleted(object arg) {
             if ((this.CreateTaskCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.CreateTaskCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.CreateTaskCompleted(this, new CreateTaskCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/IWsTareas/EditTask", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void EditTask([System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] Task oTask) {
-            this.Invoke("EditTask", new object[] {
+        [return: System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public Task EditTask([System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] Task oTask) {
+            object[] results = this.Invoke("EditTask", new object[] {
                         oTask});
+            return ((Task)(results[0]));
         }
         
         /// <remarks/>
@@ -349,7 +353,7 @@ namespace PruebaJavierFlorian.Web.WsTareas {
         private void OnEditTaskOperationCompleted(object arg) {
             if ((this.EditTaskCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.EditTaskCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.EditTaskCompleted(this, new EditTaskCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -387,22 +391,24 @@ namespace PruebaJavierFlorian.Web.WsTareas {
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/IWsTareas/ListTasks", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         [return: System.Xml.Serialization.XmlArrayAttribute(IsNullable=true)]
         [return: System.Xml.Serialization.XmlArrayItemAttribute(Namespace="http://schemas.datacontract.org/2004/07/Entities")]
-        public Task[] ListTasks() {
-            object[] results = this.Invoke("ListTasks", new object[0]);
+        public Task[] ListTasks([System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] Task oTask) {
+            object[] results = this.Invoke("ListTasks", new object[] {
+                        oTask});
             return ((Task[])(results[0]));
         }
         
         /// <remarks/>
-        public void ListTasksAsync() {
-            this.ListTasksAsync(null);
+        public void ListTasksAsync(Task oTask) {
+            this.ListTasksAsync(oTask, null);
         }
         
         /// <remarks/>
-        public void ListTasksAsync(object userState) {
+        public void ListTasksAsync(Task oTask, object userState) {
             if ((this.ListTasksOperationCompleted == null)) {
                 this.ListTasksOperationCompleted = new System.Threading.SendOrPostCallback(this.OnListTasksOperationCompleted);
             }
-            this.InvokeAsync("ListTasks", new object[0], this.ListTasksOperationCompleted, userState);
+            this.InvokeAsync("ListTasks", new object[] {
+                        oTask}, this.ListTasksOperationCompleted, userState);
         }
         
         private void OnListTasksOperationCompleted(object arg) {
@@ -601,6 +607,8 @@ namespace PruebaJavierFlorian.Web.WsTareas {
         
         private string fechaVencimientoField;
         
+        private string finalizadaField;
+        
         private string idField;
         
         private string nombreField;
@@ -648,6 +656,17 @@ namespace PruebaJavierFlorian.Web.WsTareas {
             }
             set {
                 this.fechaVencimientoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string finalizada {
+            get {
+                return this.finalizadaField;
+            }
+            set {
+                this.finalizadaField = value;
             }
         }
         
@@ -777,11 +796,55 @@ namespace PruebaJavierFlorian.Web.WsTareas {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2556.0")]
-    public delegate void CreateTaskCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    public delegate void CreateTaskCompletedEventHandler(object sender, CreateTaskCompletedEventArgs e);
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2556.0")]
-    public delegate void EditTaskCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class CreateTaskCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal CreateTaskCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public Task Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((Task)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2556.0")]
+    public delegate void EditTaskCompletedEventHandler(object sender, EditTaskCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2556.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class EditTaskCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal EditTaskCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public Task Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((Task)(this.results[0]));
+            }
+        }
+    }
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2556.0")]

@@ -1,0 +1,80 @@
+﻿@model IEnumerable<Entities.Task>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    bool crearTarea = false;
+    bool.TryParse(Session["puedeCrearTarea"].ToString(), out crearTarea);
+}
+
+<br />
+<div class="row">
+
+    @if (crearTarea)
+    {
+        <div class="col-lg-3">
+            @Html.ActionLink("Crear Tarea", "Create", null, new { @class = "btn btn-primary" });
+        </div>
+    }
+    <div class="col-lg-3">
+        @Html.ActionLink("Ver mis Tareas", "Index", new { userName = Session["userName"].ToString() }, new { @class = "btn btn-primary" })
+    </div>
+    <div class="col-lg-3">
+        @Html.ActionLink("Ver Tareas Finalizadas", "Index", new { userName = "", finalizada = "true" }, new { @class = "btn btn-primary" })
+    </div>
+    <div class="col-lg-3">
+        @Html.ActionLink("Ver Tareas No Finalizadas", "Index", new { userName = "", finalizada = "false" }, new { @class = "btn btn-primary" })
+    </div>
+</div>
+<br />
+<table class="table table-bordered table-hover table-condensed table-responsive">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.estado)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fechaCreacion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.descripcion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fechaVencimiento)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.estado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fechaCreacion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.descripcion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fechaVencimiento)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.id }, new { @class = "btn btn-primary" }) |
+                @Html.ActionLink("Delete", null, null, new { @class = "btnEliminar btn btn-primary", @data_id = item.id.ToString(), @data_nombre = item.nombre })
+            </td>
+        </tr>
+    }
+
+</table>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/Task")
+}
